@@ -37,6 +37,8 @@ class Smart
 
     public function classByEntityTypeId(string $entityTypeId): Smart
     {
+        $id = $this->getTypeBy("ENTITY_TYPE_ID",$entityTypeId)["ID"];
+        $this->id = $id;
         $type = $this->container->getTypeByEntityTypeId($entityTypeId);
         $this->setFactoryByType($type);
         return $this;
@@ -44,7 +46,7 @@ class Smart
 
     public function classByCode(string $code): Smart
     {
-        $id = $this->getTypeByCode($code)["ID"];
+        $id = $this->getTypeBy("CODE",$code)["ID"];
         return $this->classById($id);
     }
 
@@ -61,7 +63,7 @@ class Smart
         $parameters['limit'] = 1;
         $result = $this->getList($parameters);
 
-        return $result->fetch();
+        return $result ?: $result->fetch();
     }
 
     public function getList(array $parameters)
@@ -134,11 +136,11 @@ class Smart
         $this->factory = $this->container->getDynamicFactoryByType($type);
     }
 
-    private function getTypeByCode(string $code)
+    private function getTypeBy(string $field, string $value)
     {
         $resType = $this->getTypeList([
             "filter" => [
-                "CODE" => $code
+                $field => $value
             ],
             "select" => ["ID","CODE","ENTITY_TYPE_ID"]
         ]);
