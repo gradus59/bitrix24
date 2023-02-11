@@ -86,10 +86,17 @@ $smart_2->getBy($field,$value);
 ```
 
 Работает как ORM возвращая объект
+getCount() - всегда доступен
 ```
 $obResult = $smart_2->getList($parameters);
 $oneItem = $obResult->fetch();
 $allItems = $obResult->fetchAll();
+$countItems = $obResult->getCount();
+```
+
+Получить количество элементов в смарте, по фильтру и без него
+```
+$smart_2->getCount($fields);
 ```
 
 Добавляет элемент возвращая **ID** или массив ошибок

@@ -26,6 +26,11 @@ class Result
         self::$result = $result;
     }
 
+    public function getCount(): int
+    {
+        return count(self::$result);
+    }
+
     public function fetch()
     {
         $item = array_shift(self::$result);

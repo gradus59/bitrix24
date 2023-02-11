@@ -77,6 +77,11 @@ class Smart
         return $resultObject;
     }
 
+    public function getCount(array $filter = []): int
+    {
+        return $this->getFactory()->getItemsCount($filter);
+    }
+
     public function add(array $data)
     {
         $item = $this->getFactory()->createItem();
@@ -101,7 +106,7 @@ class Smart
 
     public function delete(int $id)
     {
-        // TODO: rest or unset or delete
+        $this->getFactory()->getItem($id)->delete();
     }
 
     public function getEntityId(): string
