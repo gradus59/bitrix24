@@ -5,7 +5,7 @@ use Bitrix\Crm\Service\Container;
 use Bitrix\Crm\Service\Factory;
 use Bitrix\Main\Loader;
 use Bitrix\Crm\Search;
-use GraDus59\Bitrix24\Crm\Smart\Result;
+use GraDus59\Bitrix24\Crm\Src\Smart\Result;
 
 class Smart
 {

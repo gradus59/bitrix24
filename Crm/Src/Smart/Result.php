@@ -1,6 +1,6 @@
 <?php
 
-namespace GraDus59\Bitrix24\Crm\Smart;
+namespace GraDus59\Bitrix24\Crm\Src\Smart;
 
 class Result
 {
