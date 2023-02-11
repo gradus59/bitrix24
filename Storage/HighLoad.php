@@ -1,5 +1,5 @@
 <?php
-namespace GraDus59\Bitrix24\Crm;
+namespace GraDus59\Bitrix24\Storage;
 
 use Bitrix\Highloadblock\HighloadBlockTable;
 use Bitrix\Main\Loader;
