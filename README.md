@@ -6,5 +6,9 @@
 
 tools путь к папке с сабмодулем
 ```
-"GraDus59\\Bitrix24\\": "tools/"
+    "autoload": {
+        "psr-4": {
+            "GraDus59\\Bitrix24\\": "tools/"
+        }
+    }
 ```
