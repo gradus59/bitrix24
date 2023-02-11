@@ -63,7 +63,7 @@ class Smart
         $parameters['limit'] = 1;
         $result = $this->getList($parameters);
 
-        return $result ?: $result->fetch();
+        return !$result ? $result : $result->fetch();
     }
 
     public function getList(array $parameters)
