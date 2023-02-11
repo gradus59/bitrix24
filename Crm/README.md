@@ -6,45 +6,113 @@
 ```
 use GraDus59\Bitrix24\Crm\HighLoad;
 
-$hbCountry = HighLoad::getClass()->classById(3);
-$hbCity = HighLoad::getClass()->classByName("City");
+$hb_1 = HighLoad::getObject()->classById(3);
+$hb_2 = HighLoad::getObject()->classByName("City");
 ```
 Возвращает сам класс инициализированного объекта
 ```
-$hbCity->getDataClass();
+$hb_2->getDataClass();
 ```
 
 Возвращает имя в формате **ENTITY_ID**
 ```
-$hbCity->getEntityId();
+$hb_2->getEntityId();
 ```
 
 Отдает элемент по его ID
 ```
-$hbCity->getById($id);
+$hb_2->getById($id);
 ```
 
 Отдает элемент по значению поля
 ```
-$hbCity->getBy($field,$value);
+$hb_2->getBy($field,$value);
 ```
 
 Работает как ORM возвращая объект **Result**
 ```
-$hbCity->getList($parameters);
+$hb_2->getList($parameters);
 ```
 
 Добавляет элемент возвращая **ID** или массив ошибок
 ```
-$hbCity->add($fields);
+$hb_2->add($fields);
 ```
 
 Обновляет элемент возвращая **true** или массив ошибок
 ```
-$hbCity->update(14223,$fields);
+$hb_2->update(14223,$fields);
 ```
 
 Удаляет элемент возвращая **true** или массив ошибок
 ```
-$hbCity->delete(14223);
+$hb_2->delete(14223);
+```
+
+## Smart example
+
+Инициализация объекта для работы с конкретныйм **Smart-процессом**
+```
+use GraDus59\Bitrix24\Crm\Smart;
+
+$smart_1 = Smart::getObject()->classById(3);
+$smart_2 = Smart::getObject()->classByEntityTypeId(159);
+$smart_3 = Smart::getObject()->classByCode('TEST');
+```
+
+Возвращает фабрику, через которую осуществляется работа
+```
+$smart_2->getFactory();
+```
+
+Возвращает имя в формате **ENTITY_ID**
+```
+$smart_2->getEntityId();
+```
+
+Вернет информацию о полях таблицы
+```
+$smart_2->getFieldsInfo();
+```
+
+Отдает элемент по его ID
+```
+$smart_2->getById($id);
+```
+
+Отдает элемент по значению поля
+```
+$smart_2->getBy($field,$value);
+```
+
+Работает как ORM возвращая объект
+```
+$obResult = $smart_2->getList($parameters);
+$oneItem = $obResult->fetch();
+$allItems = $obResult->fetchAll();
+```
+
+Добавляет элемент возвращая **ID** или массив ошибок
+```
+$smart_2->add($fields);
+```
+
+Обновляет элемент возвращая **true** или массив ошибок
+```
+$smart_2->update(14223,$fields);
+```
+
+Удаляет элемент возвращая **true** или массив ошибок
+```
+$smart_2->delete(14223);
+```
+
+Пересоздает индекс для элемента с указанным id
+```
+$smart_2->createIndex(133);
+```
+
+Общий метод обращается к таблице с типами смартов
+```
+$smart_2->getTypeList($parameters);
 ```

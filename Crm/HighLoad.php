@@ -6,30 +6,33 @@ use Bitrix\Main\Loader;
 
 class HighLoad
 {
-    private $id;
+    private string $entityId;
     private $dataClass;
 
+    /**
+     * @author < GraDus59 > Перебиковский Ярослав
+     */
     public function __construct()
     {
         Loader::includeModule("highloadblock");
     }
 
-    public static function getClass()
+    public static function getObject(): HighLoad
     {
         return new self();
     }
 
-    public function classById(int $id)
+    public function classById(int $id): HighLoad
     {
-        $this->id = $id;
         $hb = HighloadBlockTable::getById($id)->fetch();
         $entity = HighloadBlockTable::compileEntity($hb);
+        $this->entityId = HighloadBlockTable::compileEntityId($id);
         $this->dataClass = $entity->getDataClass();
 
         return $this;
     }
 
-    public function classByName(string $name)
+    public function classByName(string $name): HighLoad
     {
         return $this->classById($this->getIdByName($name));
     }
@@ -41,7 +44,7 @@ class HighLoad
 
     public function getEntityId(): string
     {
-        return "HLBLOCK_" . $this->id;
+        return $this->entityId;
     }
 
     public function getById(int $id)
