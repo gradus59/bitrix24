@@ -31,12 +31,14 @@ class Planer
 
     public function setCompleted(bool $completed = false)
     {
-        $this->data['completed'] = $completed ? "Y" : "N";
+        if($completed)
+            $this->data['completed'] = "Y";
     }
 
     public function setImportant(bool $important = false)
     {
-        $this->data['important'] = $important ? "Y" : "N";
+        if($important)
+            $this->data['important'] = "Y";
     }
 
     public function setType(string $type = self::PROVIDER_TYPE_CALL)
