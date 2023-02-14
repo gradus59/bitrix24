@@ -172,8 +172,6 @@ class Planer
 
     public function setDefault()
     {
-        global $USER;
-
         $this->data['ownerId'] = 0;
         $this->data['ownerType'] = "";
         $this->data['sessid'] = bitrix_sessid();

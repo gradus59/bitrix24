@@ -15,7 +15,6 @@ class Call
         string $description,
         int $createdBy,
         int $responsibleId,
-        string $providerType = "",
         string $direction = "",
         array  $notify = [],
         array  $date = [],
@@ -39,8 +38,8 @@ class Call
         $planer = new Planer();
         $planer->setCompleted($completed);
         $planer->setImportant($important);
-        $planer->setType($providerType);
-        $planer->setProvider($providerType);
+        $planer->setType();
+        $planer->setProvider();
         $planer->setDirection($direction);
         $planer->setDates($start,$end,$toUser);
         $planer->setNotify($notifyValue,$notifyType);
