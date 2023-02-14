@@ -1,4 +1,9 @@
 <?php
+//TODO: split add method
+//TODO: file save
+//TODO: webform
+//TODO: update method
+//TODO: delete method
 
 namespace GraDus59\Bitrix24\Crm\Activity;
 
@@ -73,6 +78,8 @@ class Call
         $this->planer->setDefault();
         $data = $this->planer->getData();
 
-        return \CrmActivityPlannerComponent::saveActivity($data,$this->createdBy,SITE_ID);
+        $return = \CrmActivityPlannerComponent::saveActivity($data,$this->createdBy,SITE_ID);
+
+        return $return->isSuccess() ? $return->getData() : $return->getErrorMessages();
     }
 }

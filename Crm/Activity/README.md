@@ -53,10 +53,14 @@ $call->setDirection(Planer::DIRECTION_INCOMING);
 Установка "С кем" с привязкой к компании или контакту
 ```
 $call->setRelations(123);
-$whith = [ "ENTITY_NAME" => \CCrmOwnerType::CompanyName, "ID" => 753 ];
+
+$whith = [ 
+    "ENTITY_NAME" => \CCrmOwnerType::CompanyName, 
+    "ID" => 753 
+];
 $call->setRelations(123,$whith);
 ```
-- Дата от и до, если не указать, встанет сейчас
+- Дата от и до, если не передавать ключ, встанет now()
 - TO_USER если установлена то время будет не по серверу передано, а по настройкам из профиля
 - Детальное указание диапазона
 ```
