@@ -192,6 +192,13 @@ class Planer
         $this->data['responsibleId'] = $id;
     }
 
+    public function setFiles(array $arFile)
+    {
+        foreach ($arFile as $fileId):
+            $this->data['diskfiles'][] = $fileId;
+        endforeach;
+    }
+
     public function getData()
     {
         return $this->data;

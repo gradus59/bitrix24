@@ -1,10 +1,10 @@
 <?php
 //TODO: file save
 //TODO: webform
-//TODO: update method
-//TODO: delete method
 
 namespace GraDus59\Bitrix24\Crm\Activity;
+
+use Bitrix\Crm\ActivityTable;
 
 class Call
 {
@@ -77,6 +77,11 @@ class Call
         $this->planer->setDuration($durationValue,$durationType);
     }
 
+    public function setFiles(array $arFile)
+    {
+        $this->planer->setFiles($arFile);
+    }
+
     public function add()
     {
         $data = $this->planer->getData();
@@ -91,13 +96,26 @@ class Call
         return $return->isSuccess();
     }
 
-    public function getResult()
+    public function update(int $id, array $data): \Bitrix\Main\ORM\Data\UpdateResult
     {
-        return $this->result;
+        unset($data['ID'], $data['PROVIDER_ID'], $data['PROVIDER_TYPE_ID']);
+        $arData = $data;
+
+        return ActivityTable::update($id,$arData);
+    }
+
+    public function delete(int $id): \Bitrix\Main\ORM\Data\DeleteResult
+    {
+        return ActivityTable::delete($id);
     }
 
     private function setResult($result)
     {
         $this->result = $result;
+    }
+
+    public function getResult()
+    {
+        return $this->result;
     }
 }
