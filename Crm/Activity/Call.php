@@ -1,5 +1,4 @@
 <?php
-//TODO: split add method
 //TODO: file save
 //TODO: webform
 //TODO: update method
@@ -11,6 +10,7 @@ class Call
 {
     private ?Planer $planer = null;
     private $createdBy;
+    private $result;
 
     public function __construct()
     {
@@ -31,6 +31,7 @@ class Call
         $this->createdBy = $createdBy;
         $this->planer->setType();
         $this->planer->setProvider();
+        $this->planer->setDefault();
     }
 
     public function callCompleted()
@@ -63,7 +64,7 @@ class Call
         $this->planer->setDeal($dealId);
     }
 
-    public function add(array  $date = [], array  $duration = [])
+    public function setDate(array  $date = [], array  $duration = [])
     {
         $start = count($date['START']) == 0 ? date('d.m.Y H:i:s') : $date['START'];
         $end = count($date['END']) == 0 ? date('d.m.Y H:i:s') : $date['END'];
@@ -74,12 +75,29 @@ class Call
 
         $this->planer->setDates($start,$end,$toUser);
         $this->planer->setDuration($durationValue,$durationType);
+    }
 
-        $this->planer->setDefault();
+    public function add()
+    {
         $data = $this->planer->getData();
-
         $return = \CrmActivityPlannerComponent::saveActivity($data,$this->createdBy,SITE_ID);
 
-        return $return->isSuccess() ? $return->getData() : $return->getErrorMessages();
+        if($return->isSuccess()) {
+            $this->setResult($return->getData());
+        }else{
+            $this->setResult($return->getErrorMessages());
+        }
+
+        return $return->isSuccess();
+    }
+
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    private function setResult($result)
+    {
+        $this->result = $result;
     }
 }
