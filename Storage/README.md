@@ -48,3 +48,34 @@ $hb_2->update(14223,$fields);
 ```
 $hb_2->delete(14223);
 ```
+
+## Csv example
+
+Инициализация объекта Csv
+```
+use GraDus59\Bitrix24\Crm\Csv;
+
+$obCsv = Csv::getInstance();
+```
+
+Стандартный разделитель - ';', чтобы сменить:
+```
+$obCsv->setSeparator("|");
+```
+
+Метод отменяет применение первой строки файла в качестве ключей
+для всех остальных строк
+```
+$obCsv->notSetHeader();
+```
+
+Стандартный разделитель - ';', чтобы сменить:
+```
+$path = $_SERVER['DOCUMENT_ROOT'] . "/upload/csv_import/test.csv";
+$obCsv->read($path);
+```
+
+Выдать следующую строку
+```
+$obCsv->Next();
+```
