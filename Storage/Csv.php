@@ -79,7 +79,9 @@ class Csv
 
     private function setHeader()
     {
-        $array = $this->getRow();
+        $array = array_map(function ($key){
+            return trim($key);
+        },$this->getRow());
         if(!empty($this->aliases))
             $array = json_decode(
                 str_replace(
@@ -89,8 +91,6 @@ class Csv
                 ),
                 true
             );
-        $this->title = array_map(function ($key){
-            return trim($key);
-        },$array);
+        $this->title = $array;
     }
 }
