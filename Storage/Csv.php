@@ -10,6 +10,7 @@ class Csv
     private string $separator = ";";
     private $stream;
     private $title;
+    private array $aliases = [];
 
     public static function getInstance():Csv
     {
@@ -26,6 +27,11 @@ class Csv
     public function notSetHeader()
     {
         $this->biggestRow = true;
+    }
+
+    public function headAliases(array $aliases)
+    {
+        $this->aliases = $aliases;
     }
 
     public function read(string $path)
@@ -74,6 +80,15 @@ class Csv
     private function setHeader()
     {
         $array = $this->getRow();
+        if(!empty($this->aliases))
+            $array = json_decode(
+                str_replace(
+                    array_keys($this->aliases),
+                    $this->aliases,
+                    json_encode($array)
+                ),
+                true
+            );
         $this->title = $array;
     }
 }

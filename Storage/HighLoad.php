@@ -86,7 +86,7 @@ class HighLoad
         return $result->isSuccess() ?: $result->getErrorMessages();
     }
 
-    private function getIdByName(string $name)
+    public function getIdByName(string $name)
     {
         $obHb = HighloadBlockTable::getList([
             "select" => ["ID"],
