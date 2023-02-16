@@ -1,6 +1,4 @@
 <?php
-//TODO: file save
-//TODO: webform
 
 namespace GraDus59\Bitrix24\Crm\Activity;
 

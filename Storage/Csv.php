@@ -89,6 +89,8 @@ class Csv
                 ),
                 true
             );
-        $this->title = $array;
+        $this->title = array_map(function ($key){
+            return trim($key);
+        },$array);
     }
 }
