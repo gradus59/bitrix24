@@ -53,7 +53,7 @@ $hb_2->delete(14223);
 
 Инициализация объекта Csv
 ```
-use GraDus59\Bitrix24\Crm\Csv;
+use GraDus59\Bitrix24\Storage\Csv;
 
 $obCsv = Csv::getInstance();
 ```

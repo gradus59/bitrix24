@@ -35,7 +35,8 @@ class Csv
             die("Открыть файл по указанному пути '" . $path . "' не удалось");
 
         $this->stream = $stream;
-        $this->setHeader();
+        if(!$this->biggestRow)
+            $this->setHeader();
     }
 
     public function Next()
