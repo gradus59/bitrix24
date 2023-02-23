@@ -3,6 +3,7 @@
 namespace GraDus59\Bitrix24\Crm\Activity;
 
 use Bitrix\Crm\ActivityTable;
+use GraDus59\Bitrix24\Crm\Src\Activity\Planer;
 
 class CallList
 {

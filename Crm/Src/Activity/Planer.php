@@ -1,6 +1,6 @@
 <?php
 
-namespace GraDus59\Bitrix24\Crm\Activity;
+namespace GraDus59\Bitrix24\Crm\Src\Activity;
 
 use Bitrix\Main\Type\DateTime;
 use Bitrix\Crm\Activity\Provider;

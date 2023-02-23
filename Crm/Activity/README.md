@@ -15,7 +15,7 @@
 Инициализация классадля создания звонка
 ```
 use GraDus59\Bitrix24\Crm\Activity\Call;
-use GraDus59\Bitrix24\Crm\Activity\Planer;
+use GraDus59\Bitrix24\Crm\Src\Activity\Planer;
 
 $call = new Call();
 ```
@@ -108,7 +108,7 @@ $result = $call->delete($id);
 Инициализация классадля создания звонка
 ```
 use GraDus59\Bitrix24\Crm\Activity\CallList;
-use GraDus59\Bitrix24\Crm\Activity\Planer;
+use GraDus59\Bitrix24\Crm\Src\Activity\Planer;
 
 $callList = new CallList();
 ```
