@@ -125,35 +125,35 @@ $callList->setRelations(\CCrmOwnerType::Company,[1,2,3]);
 - От кого создаем
 - Ответственный
 ```
-$call->setHead('subject','description',1,1);
+$callList->setHead('subject','description',1,1);
 ```
 
 Установка выполненного звонка
 ```
-$call->callCompleted();
+$callList->callCompleted();
 ```
 
 Установка важности звонка
 ```
-$call->callImportant();
+$callList->callImportant();
 ```
 
 Установка напоминания звонка
 ```
 $notify = [ "VALUE" => 15, "TYPE" => Planer::MINUTE_TEXT ];
-$call->setNotify($notify);
+$callList->setNotify($notify);
 ```
 
 Установка типа звонка
 ```
-$call->setDirection(Planer::DIRECTION_INCOMING);
+$callList->setDirection(Planer::DIRECTION_INCOMING);
 ```
 
 - Дата от и до, если не передавать ключ, встанет now()
 - TO_USER если установлена то время будет не по серверу передано, а по настройкам из профиля
 - Детальное указание диапазона
 ```
-$call->setDate(
+$callList->setDate(
     [
         "START" => "", 
         "END" => ""
@@ -168,20 +168,20 @@ $call->setDate(
 Добавить звонок
 - Возвращает bool
 ```
-$return = $call->add();
+$return = $callList->add();
 ```
 
 Получаем результат: массив данных или ошибок.
 ```
-$result = $call->getResult();
+$result = $callList->getResult();
 ```
 
 Обновить элемент, передаем в ключах значения из таблицы b_crm_act
 ```
-$result = $call->update($id,$data);
+$result = $callList->update($id,$data);
 ```
 
 Удалить элемент
 ```
-$result = $call->delete($id);
+$result = $callList->delete($id);
 ```
