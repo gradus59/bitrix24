@@ -68,6 +68,7 @@ class CallList
         $callList = \Bitrix\Crm\CallList\CallList::createWithId($relation->getId(), true);
         $callList->setEntityTypeId($entity_type);
         $callList->addEntities($entities);
+        $callList->persist();
 
         $this->planer->setCallListId($relation->getId());
     }
