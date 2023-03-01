@@ -118,4 +118,12 @@ class BaseChange
             $retrievals[$key] = self::shiftArrayItem($array, $key);
         return $retrievals;
     }
+
+    public static function createDir($path)
+    {
+        $needPath = $_SERVER['DOCUMENT_ROOT'] . $path;
+
+        if(!is_dir($needPath))
+            mkdir($needPath);
+    }
 }
