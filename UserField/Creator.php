@@ -7,8 +7,8 @@ use GraDus59\Bitrix24\Storage\Data\BaseChange;
 class Creator
 {
     private const REPLACE_STR = "%class%";
-    private const EDIT_FIELD_FILE = "/templates/system.field.edit";
-    private const VIEW_FIELD_FILE = "/templates/system.field.view";
+    private const EDIT_FIELD_FILE = "/src/templates/system.field.edit";
+    private const VIEW_FIELD_FILE = "/src/templates/system.field.view";
 
     public function createTemplate($class)
     {

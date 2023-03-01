@@ -122,8 +122,7 @@ class BaseChange
     public static function createDir($path)
     {
         $needPath = $_SERVER['DOCUMENT_ROOT'] . $path;
-
         if(!is_dir($needPath))
-            mkdir($needPath);
+            mkdir($needPath,BX_DIR_PERMISSIONS,true);
     }
 }
