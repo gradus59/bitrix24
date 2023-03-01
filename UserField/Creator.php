@@ -1,6 +1,6 @@
 <?php
 
-namespace GraDus59\Thistle\UserField;
+namespace GraDus59\Bitrix24\UserField;
 
 use GraDus59\Bitrix24\Storage\Data\BaseChange;
 
