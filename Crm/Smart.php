@@ -69,8 +69,6 @@ class Smart
     public function getList(array $parameters)
     {
         $items = $this->getFactory()->getItems($parameters);
-        if(!$items)
-            return false;
 
         $resultObject = Result::getInstance();
         $resultObject->setResult($items);

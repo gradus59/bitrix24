@@ -33,6 +33,9 @@ class Result
 
     public function fetch()
     {
+        if(!self::$result)
+            return false;
+
         $item = array_shift(self::$result);
         return $item->getData();
     }
