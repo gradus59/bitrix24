@@ -57,26 +57,26 @@ class BaseChange
 
     public static function toBool($value, array $template = [true,false])
     {
+        $value = is_string($value) ? strtolower($value) : $value;
+
         $whiteListBoolValues = [
             "positive" => [
-                'Y',
+                'y',
                 1,
                 '1',
                 true,
                 'true',
-                'TRUE',
-                'Да',
-                'Yes',
+                'да',
+                'yes',
             ],
             "negative" => [
-                'N',
+                "n",
                 0,
                 '0',
                 false,
-                'false',
-                'FALSE',
-                'Нет',
-                'No',
+                "false",
+                "нет",
+                "no",
                 "",
                 NULL
             ]

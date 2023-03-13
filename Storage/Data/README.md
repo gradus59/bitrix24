@@ -121,6 +121,8 @@ use GraDus59\Bitrix24\Storage\Data\Find as DCFind;
 ```
 
 Достать из строки подстроку лежащую между символами
+
+**Быть аккуратнее, так как метод может вместо символов и выражение принять**
 ```
 $string = "I'm are busy[so-so] human.";
 DCFind::getValuesBetweenInChars($string,'[',']');
@@ -132,4 +134,10 @@ DCFind::getValuesBetweenOutChars($string,'[',']');
 DCFind::getValuesBetweenChars($string,'[',']');
 // 0 - [so-so]
 // 1 - so-so
+
+!!!!!!!!
+DCFind::getValuesBetweenChars($string,"^",".+");
+DCFind::getValuesBetweenChars($string,"I",".+");
+// 0 - I'm are busy[so-so] human."
+// 1 - 
 ```
