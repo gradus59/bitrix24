@@ -6,6 +6,10 @@ use GraDus59\Bitrix24\Structure\Src\CheckingManager;
 
 class EventManager extends \Bitrix\Main\EventManager
 {
+    function __construct() {
+        parent::__construct();
+    }
+
     public function addEventHandler(
         $module,
         $event,
