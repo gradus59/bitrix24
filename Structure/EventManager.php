@@ -1,5 +1,7 @@
 <?php
 
+namespace GraDus59\Bitrix24\Structure;
+
 use GraDus59\Bitrix24\Structure\Src\CheckingManager;
 
 class EventManager extends \Bitrix\Main\EventManager
