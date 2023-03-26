@@ -29,14 +29,16 @@ class Includes
             [__CLASS__, 'HbSearch']
         );
 
-        EventManager::getInstance()->addEventHandler(
-            'main', self::EVENT_CRM_FIELD,
-            [SelectList::class, 'getUserTypeDescription']
-        );
+
     }
 
     public static function HbSearch()
     {
+        EventManager::getInstance()->addEventHandler(
+            'main', self::EVENT_CRM_FIELD,
+            [SelectList::class, 'getUserTypeDescription']
+        );
+
         $page = Support::getPage();
 
         $arPages = [
