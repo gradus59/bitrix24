@@ -58,10 +58,14 @@ class SelectList extends EnumType
     }
 
     public static function GetPublicViewHTML($arUserField, $arAdditionalParameters = array())
-    {}
+    {
+        return "";
+    }
 
     public static function GetPublicEditHTML($arUserField, $arAdditionalParameters = array())
-    {}
+    {
+        return "";
+    }
 
     public static function GetSettingsHTML($userField, ?array $additionalParameters, $varsFromForm): string
     {
