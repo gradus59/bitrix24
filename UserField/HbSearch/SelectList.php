@@ -56,6 +56,12 @@ class SelectList
         ];
     }
 
+    public static function GetPublicViewHTML()
+    {}
+
+    public static function GetPublicEditHTML()
+    {}
+
     public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
     {
 
