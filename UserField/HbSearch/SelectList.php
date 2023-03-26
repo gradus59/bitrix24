@@ -69,8 +69,17 @@ class SelectList extends EnumType
 
     public static function GetSettingsHTML($userField, ?array $additionalParameters, $varsFromForm): string
     {
-        var_dump($userField);
-        return "test";
+        $parameterName = $additionalParameters["NAME"];
+
+        return '
+            <tr>
+                <td>Highload элементы:</td>
+                <td>
+                    <select size="5" name="'.$parameterName.'[HB]">
+                        <option selected value="0">Не выбрано</option>
+                    </select>
+                </td>
+            </tr>';
     }
 
     public static function getDbColumnType(): string
