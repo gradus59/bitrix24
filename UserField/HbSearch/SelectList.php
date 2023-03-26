@@ -2,11 +2,12 @@
 
 namespace GraDus59\Bitrix24\UserField\HbSearch;
 
+use Bitrix\Main\UserField\Types\EnumType;
 use GraDus59\Bitrix24\Storage\HighLoad;
 use GraDus59\Bitrix24\UserField\DataSearch;
 use GraDus59\Bitrix24\UserField\FindFilter;
 
-class SelectList
+class SelectList extends EnumType
 {
     const USER_TYPE = 'HbSearch';
 
@@ -56,14 +57,34 @@ class SelectList
         ];
     }
 
-    public static function GetPublicViewHTML()
+    public static function GetPublicViewHTML($arUserField, $arAdditionalParameters = array())
     {}
 
-    public static function GetPublicEditHTML()
+    public static function GetPublicEditHTML($arUserField, $arAdditionalParameters = array())
     {}
 
     public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
     {
 
+    }
+
+    public static function getDbColumnType(): string
+    {
+        return 'text';
+    }
+
+    public static function getLength ($property, $value)
+    {
+        return 0;
+    }
+
+    public static function convertToDb ($property, $value)
+    {
+        return $value;
+    }
+
+    public static function convertFromDb ($property, $value)
+    {
+        return $value;
     }
 }
