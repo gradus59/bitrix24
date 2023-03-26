@@ -7,7 +7,7 @@ use GraDus59\Bitrix24\Storage\HighLoad;
 use GraDus59\Bitrix24\UserField\DataSearch;
 use GraDus59\Bitrix24\UserField\FindFilter;
 
-class SelectList
+class SelectList extends EnumType
 {
     const USER_TYPE = 'HbSearch';
 
