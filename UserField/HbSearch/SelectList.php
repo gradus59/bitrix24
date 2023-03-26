@@ -65,7 +65,7 @@ class SelectList
 
     public static function GetSettingsHTML($userField, ?array $additionalParameters, $varsFromForm): string
     {
-
+        return "test";
     }
 
     public static function getDbColumnType(): string
