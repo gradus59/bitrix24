@@ -65,6 +65,7 @@ class SelectList
 
     public static function GetSettingsHTML($userField, ?array $additionalParameters, $varsFromForm): string
     {
+        var_dump($userField);
         return "test";
     }
 
