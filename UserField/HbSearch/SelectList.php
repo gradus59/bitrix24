@@ -48,7 +48,7 @@ class SelectList extends EnumType
         return [
             'PROPERTY_TYPE' => 'enumeration',
             'USER_TYPE'     => self::USER_TYPE,
-            'DESCRIPTION'   => "HB-locations",
+            'DESCRIPTION'   => "HB-search",
             'BASE_TYPE'     => \CUserTypeManager::BASE_TYPE_ENUM,
             'CLASS_NAME'    => __CLASS__,
             'USER_TYPE_ID'  => self::USER_TYPE,
