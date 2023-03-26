@@ -7,7 +7,7 @@ use GraDus59\Bitrix24\Storage\HighLoad;
 use GraDus59\Bitrix24\UserField\DataSearch;
 use GraDus59\Bitrix24\UserField\FindFilter;
 
-class SelectList extends EnumType
+class SelectList
 {
     const USER_TYPE = 'HbSearch';
 
@@ -63,7 +63,7 @@ class SelectList extends EnumType
     public static function GetPublicEditHTML($arUserField, $arAdditionalParameters = array())
     {}
 
-    public static function GetSettingsHTML($arProperty, $strHTMLControlName, &$arPropertyFields)
+    public static function GetSettingsHTML($userField, ?array $additionalParameters, $varsFromForm): string
     {
 
     }
