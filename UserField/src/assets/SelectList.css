@@ -16,8 +16,8 @@
     color: #535c69;
 }
 
-.auto-complete__input:focus {
-    border: 1px solid rgba(81, 203, 238, 1);
+.auto-complete__input:hover {
+    border-color: var(--ui-field-color-primary);
 }
 
 .auto-complete__input-selected {
