@@ -68,6 +68,22 @@ class HighLoad
         return $this->getDataClass()::getList($parameters);
     }
 
+    public function getListArray()
+    {
+        $resHb = HighloadBlockTable::getList([
+            "select" => ["ID", "NAME"],
+            "filter" => []
+        ]);
+
+        $hbList = [];
+
+        while ($item = $resHb->Fetch()):
+            $hbList[$item["ID"]] = $item["NAME"];
+        endwhile;
+
+        return $hbList;
+    }
+
     public function add(array $data)
     {
         $result = $this->getDataClass()::add($data);

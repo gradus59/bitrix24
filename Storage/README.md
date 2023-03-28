@@ -49,6 +49,11 @@ $hb_2->update(14223,$fields);
 $hb_2->delete(14223);
 ```
 
+Вернет массив, где ID => NAME всех hb
+```
+$hb_2->getListArray();
+```
+
 ## Csv example
 
 Инициализация объекта Csv
