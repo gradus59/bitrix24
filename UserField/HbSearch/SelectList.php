@@ -2,14 +2,16 @@
 
 namespace GraDus59\Bitrix24\UserField\HbSearch;
 
-use Bitrix\Main\UserField\Types\EnumType;
 use GraDus59\Bitrix24\Storage\HighLoad;
+use GraDus59\Bitrix24\UserField\CustomType;
 use GraDus59\Bitrix24\UserField\DataSearch;
 use GraDus59\Bitrix24\UserField\FindFilter;
+use GraDus59\Bitrix24\UserField\GetSettings;
 
-class SelectList extends EnumType
+class SelectList extends CustomType
 {
     const USER_TYPE = 'HbSearch';
+    const AJAX_URL = "/ajax/hbSearch.php";
 
     public static function ajaxItems($searchString, $hbId, $fieldSearch, $limit)
     {
@@ -45,60 +47,88 @@ class SelectList extends EnumType
 
     public static function getUserTypeDescription (): array
     {
-        return [
-            'PROPERTY_TYPE' => 'enumeration',
-            'USER_TYPE'     => self::USER_TYPE,
-            'DESCRIPTION'   => "HB-search",
-            'BASE_TYPE'     => \CUserTypeManager::BASE_TYPE_ENUM,
-            'CLASS_NAME'    => __CLASS__,
-            'USER_TYPE_ID'  => self::USER_TYPE,
-            "EDIT_CALLBACK" => [__CLASS__, 'GetPublicEditHTML'],
-            "VIEW_CALLBACK" => [__CLASS__, 'GetPublicViewHTML']
-        ];
+        return parent::getMyDescription(
+            self::USER_TYPE,
+            "HB-search",
+            __CLASS__
+        );
     }
 
-    public static function GetPublicViewHTML($arUserField, $arAdditionalParameters = array())
+    public static function GetPublicViewHTML($arUserField, $arAdditionalParameters = array()): string
     {
-        return "";
+        $settings = $arUserField['SETTINGS']['SETTINGS'];
+
+        $resultPrint = self::getSelectArray(
+            $arUserField['VALUE'],
+            $settings['HB_ID'],
+            $settings['HB_NAME']
+        );
+
+        return implode(';<br>',$resultPrint);
     }
 
-    public static function GetPublicEditHTML($arUserField, $arAdditionalParameters = array())
+    public static function GetPublicEditHTML($arUserField, $arAdditionalParameters = array()): string
     {
-        return "";
+        $settings = $arUserField['SETTINGS']['SETTINGS'];
+        $resultPrint = self::getSelectArray(
+            $arUserField['VALUE'],
+            $settings['HB_ID'],
+            $settings['HB_NAME']
+        );
+
+        $jsonInit = DataSearch::jsonInit(
+            $arUserField['FIELD_NAME'],
+            $resultPrint,
+            $arUserField['MULTIPLE'],
+            $settings['HB_AJAX'],
+            [
+                "hbId" => $settings['HB_ID'],
+                "fieldSearch" => $settings['HB_NAME'],
+                "limit" => $settings['HB_TIME_STOP']
+            ],
+            $settings['HB_TIME_STOP']
+        );
+
+        return parent::getSelectListHTML($arUserField['FIELD_NAME'],$jsonInit);
     }
 
     public static function GetSettingsHTML($userField, ?array $additionalParameters, $varsFromForm): string
     {
         $parameterName = $additionalParameters["NAME"];
+        $settings = $userField['SETTINGS'][$parameterName];
+        $hbList = HighLoad::getObject()->getListArray();
 
-        return '
-            <tr>
-                <td>Highload элементы:</td>
-                <td>
-                    <select size="5" name="'.$parameterName.'[HB]">
-                        <option selected value="0">Не выбрано</option>
-                    </select>
-                </td>
-            </tr>';
+        return GetSettings::elements([
+            "HighLoad:" => GetSettings::arrayToSelect($parameterName."[HB_ID]",$hbList,$settings['HB_ID']),
+            Lang::get("HB_TITLE") => GetSettings::toInputText($parameterName."[HB_NAME]",[
+                "text" => "text",
+                "value" => $settings['HB_NAME'] == "" ? "UF_NAME" : $settings['HB_NAME']
+            ]),
+            Lang::get("TIME_STOP") => GetSettings::toInputText($parameterName."[HB_TIME_STOP]",[
+                "type" => "number",
+                "value" => $settings['HB_TIME_STOP'] == "" ? 300 : $settings['HB_TIME_STOP']
+            ]),
+            Lang::get("AJAX") => GetSettings::toInputText($parameterName."[HB_AJAX]",[
+                "type" => "text",
+                "value" => $settings['HB_AJAX'] == "" ? parent::ajaxDir(self::AJAX_URL) : $settings['HB_AJAX']
+            ]),
+        ]);
     }
 
-    public static function getDbColumnType(): string
+    private static function getSelectArray($value, $hbId, $hbName): array
     {
-        return 'text';
-    }
+        $hb = HighLoad::getObject()->classById($hbId);
 
-    public static function getLength ($property, $value)
-    {
-        return 0;
-    }
+        $obFind = $hb->getList([
+            "filter" => [
+                "=ID" => is_array($value) ? $value : explode(',', $value)
+            ]
+        ]);
 
-    public static function convertToDb ($property, $value)
-    {
-        return $value;
-    }
+        $resultPrint = [];
+        while ($resFind = $obFind->fetch())
+            $resultPrint[$resFind['ID']] = $resFind[$hbName];
 
-    public static function convertFromDb ($property, $value)
-    {
-        return $value;
+        return $resultPrint;
     }
 }

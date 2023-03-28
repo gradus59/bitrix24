@@ -30,7 +30,7 @@ class FindFilter
             endforeach;
 
             if(count($filter) != 0)
-                $filter[] = ["LOGIC" => "OR"];
+                $filter["LOGIC"] = "OR";
         endif;
 
         if(is_int($typeSearch)):

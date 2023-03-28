@@ -10,7 +10,7 @@ use GraDus59\Bitrix24\UserField\HbSearch\SelectList;
 
 class Includes
 {
-    private const ASSETS_DIR = __DIR__ . "/assets/";
+    private const ASSETS_DIR = "/src/assets/";
     private const ASSET_CSS = "SelectList.css";
     private const ASSET_JS = "SelectList.js";
 
@@ -28,8 +28,6 @@ class Includes
             'main', self::EVENT_ON_PROLOG,
             [__CLASS__, 'HbSearch']
         );
-
-
     }
 
     public static function HbSearch()
@@ -51,8 +49,13 @@ class Includes
         if(in_array(true,$arPages))
         {
             $asset = Asset::getInstance();
-            $asset->addCss(self::ASSETS_DIR . self::ASSET_CSS);
-            $asset->addJs(self::ASSETS_DIR . self::ASSET_JS);
+            $asset->addCss( self::assetsDir() . self::ASSET_CSS);
+            $asset->addJs(self::assetsDir() . self::ASSET_JS);
         }
+    }
+
+    private static function assetsDir(): string
+    {
+        return str_replace($_SERVER['DOCUMENT_ROOT'], "",__DIR__) . self::ASSETS_DIR;
     }
 }
