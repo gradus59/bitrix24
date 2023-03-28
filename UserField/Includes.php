@@ -22,7 +22,7 @@ class Includes
         self::initHbSearch();
     }
 
-    private static function initHbSearch()
+    private static function initHbSearch(): void
     {
         EventManager::getInstance()->addEventHandler(
             'main', self::EVENT_ON_PROLOG,
@@ -30,21 +30,31 @@ class Includes
         );
     }
 
-    public static function HbSearch()
+    public static function HbSearch(): void
+    {
+        self::assetsSelectList(SelectList::class);
+    }
+
+    public static function assetsSelectList(string $CLASS, array $pages = []): void
     {
         EventManager::getInstance()->addEventHandler(
             'main', self::EVENT_CRM_FIELD,
-            [SelectList::class, 'getUserTypeDescription']
+            [$CLASS, 'getUserTypeDescription']
         );
 
         $page = Support::getPage();
+        $customPages = [];
 
-        $arPages = [
+        foreach ($pages as $customPage):
+            $customPages[] = BaseChange::inString($page,$customPage);
+        endforeach;
+
+        $arPages = array_merge($customPages,[
             BaseChange::inString($page,"/crm/contact/details/"),
             BaseChange::inString($page,"/crm/company/details/"),
             BaseChange::inString($page,"/crm/deal/details/"),
             BaseChange::inString($page,"/crm/lead/details/"),
-        ];
+        ]);
 
         if(in_array(true,$arPages))
         {

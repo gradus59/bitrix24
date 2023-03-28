@@ -8,7 +8,7 @@ use GraDus59\Bitrix24\UserField\DataSearch;
 use GraDus59\Bitrix24\UserField\FindFilter;
 use GraDus59\Bitrix24\UserField\GetSettings;
 
-class SelectList extends CustomType
+final class SelectList extends CustomType
 {
     const USER_TYPE = 'HbSearch';
     const AJAX_URL = "/ajax/hbSearch.php";
