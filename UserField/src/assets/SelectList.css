@@ -74,6 +74,7 @@
     overflow-x: hidden;
     max-height: 150px;
     z-index: 5;
+    border-radius: 10px;
 }
 
 .auto-complete__search-item {
