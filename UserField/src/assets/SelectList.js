@@ -8,7 +8,7 @@
     }
 
     class AutoComplete {
-        constructor({selector, initValues,inputName,multiple,ajaxUrl,timeout,ajaxData,token,sessid}) {
+        constructor({selector, initValues,inputName,multiple,ajaxUrl,timeout,ajaxData,searchLength,token,sessid}) {
             this.selector = selector;
             this.selectedItems = [];
             this.initValues = initValues;
@@ -19,6 +19,7 @@
             this.ajaxData = ajaxData;
             this.token = token;
             this.sessid = sessid;
+            this.searchLength = searchLength;
             this.init();
         }
 
@@ -183,6 +184,9 @@
         }
 
         request(search) {
+            if(search.length < this.searchLength)
+                return;
+
             this.setLoading(true);
 
             this.controller = new AbortController();

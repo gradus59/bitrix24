@@ -7,7 +7,15 @@ use GraDus59\Bitrix24\Storage\Ajax;
 
 class DataSearch
 {
-    public static function jsonInit(string $fieldName, array $initValues, string $multiple, string $ajaxUrl, array $ajaxData = [], int $timeout = 300)
+    public static function jsonInit(
+        string $fieldName,
+        array $initValues,
+        string $multiple,
+        string $ajaxUrl,
+        int $searchLength = 2,
+        array $ajaxData = [],
+        int $timeout = 300
+    )
     {
         $arOption = [];
         foreach ($initValues as $id => $title):
@@ -30,6 +38,7 @@ class DataSearch
         $options['multiple'] = $boolMultiple;
         $options['ajaxUrl'] = $ajaxUrl;
         $options['ajaxData'] = $ajaxData;
+        $options['searchLength'] = $searchLength;
         $options['timeout'] = $timeout;
 
         return Json::encode($options);

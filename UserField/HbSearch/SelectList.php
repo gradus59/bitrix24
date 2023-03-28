@@ -81,6 +81,7 @@ class SelectList extends CustomType
             $resultPrint,
             $arUserField['MULTIPLE'],
             $settings['HB_AJAX'],
+            $settings['HB_LENGTH_SEARCH'],
             [
                 "hbId" => $settings['HB_ID'],
                 "fieldSearch" => $settings['HB_NAME'],
@@ -111,6 +112,10 @@ class SelectList extends CustomType
             Lang::get("AJAX") => GetSettings::toInputText($parameterName."[HB_AJAX]",[
                 "type" => "text",
                 "value" => $settings['HB_AJAX'] == "" ? parent::ajaxDir(self::AJAX_URL) : $settings['HB_AJAX']
+            ]),
+            Lang::get("HB_LENGTH_SEARCH") => GetSettings::toInputText($parameterName."[HB_LENGTH_SEARCH]",[
+                "type" => "text",
+                "value" => $settings['HB_LENGTH_SEARCH'] == "" ? 2 : $settings['HB_LENGTH_SEARCH']
             ]),
         ]);
     }
