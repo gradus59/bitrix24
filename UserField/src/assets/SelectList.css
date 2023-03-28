@@ -17,6 +17,7 @@
 }
 
 .auto-complete__input:hover {
+    transition: 0.5s;
     border-color: var(--ui-field-color-primary);
 }
 
