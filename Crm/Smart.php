@@ -47,6 +47,7 @@ class Smart
     public function classByCode(string $code): Smart
     {
         $id = $this->getTypeBy("CODE",$code)["ID"];
+        $this->id = $id;
         return $this->classById($id);
     }
 
@@ -73,6 +74,11 @@ class Smart
         $resultObject = Result::getInstance();
         $resultObject->setResult($items);
         return $resultObject;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 
     public function getCount(array $filter = []): int
