@@ -147,4 +147,15 @@ class Curl
     {
         return curl_version();
     }
+
+    public function clear()
+    {
+        $this->url = "";
+        $this->requestType = "";
+        $this->auth = "";
+        $this->data = "";
+        $this->response = "";
+        $this->info = "";
+        $this->error = "";
+    }
 }
