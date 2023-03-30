@@ -4,7 +4,7 @@ namespace GraDus59\Bitrix24\Storage;
 
 class Curl
 {
-    private static ?Curl $instance;
+    private static ?Curl $instance = null;
 
     private string $url = "";
     private string $requestType = "";
