@@ -11,6 +11,8 @@ class Curl
     private $auth;
     private $data;
     private $response;
+    private $info;
+    private $error;
 
     public function __construct()
     {
@@ -29,7 +31,18 @@ class Curl
     {
         $curl = curl_init();
 
-        curl_setopt_array($curl, array(
+        curl_setopt_array($curl, $this->opt());
+        $this->setResponse(curl_exec($curl));
+        $this->setInfo(curl_getinfo($curl));
+        $this->setError(curl_error($curl));
+        curl_close($curl);
+        return $this->getResponse();
+
+    }
+
+    public function opt(): array
+    {
+        return [
             CURLOPT_URL => $this->getUrl(),
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
@@ -43,11 +56,7 @@ class Curl
                 $this->auth,
                 'Content-Type: application/json'
             ),
-        ));
-
-        $this->setResponse(curl_exec($curl));
-        curl_close($curl);
-        return $this->getResponse();
+        ];
     }
 
     public function basicAuth(string $login,string $password)
@@ -56,6 +65,16 @@ class Curl
                 $login . ":" . $password
             );
         return $this;
+    }
+
+    public function setInfo($info)
+    {
+        $this->info = $info;
+    }
+
+    public function getInfo()
+    {
+        return $this->info;
     }
 
     public function setUrl(string $url)
@@ -111,5 +130,21 @@ class Curl
     public function getData()
     {
         return $this->data;
+    }
+
+    public function setError($error)
+    {
+        $this->error = $error;
+        return $this;
+    }
+
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    public function getVersion()
+    {
+        return curl_version();
     }
 }
