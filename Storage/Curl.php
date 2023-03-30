@@ -50,7 +50,7 @@ class Curl
         return $this->getResponse();
     }
 
-    public function basicAuth(string $login,string $password): static
+    public function basicAuth(string $login,string $password)
     {
         $this->auth = 'Authorization: Basic ' . base64_encode(
                 $login . ":" . $password
@@ -58,7 +58,7 @@ class Curl
         return $this;
     }
 
-    public function setUrl(string $url): static
+    public function setUrl(string $url)
     {
         $this->url = $url;
         return $this;
@@ -69,7 +69,7 @@ class Curl
         return $this->url;
     }
 
-    public function setResponse($response): static
+    public function setResponse($response)
     {
         $this->response = $response;
         return $this;
@@ -80,15 +80,20 @@ class Curl
         return $this->response;
     }
 
-    public function setRequestType(string $requestType): static
+    public function setRequestType(string $requestType)
     {
         $type = strtolower($requestType);
-        $this->requestType = match($type)
-        {
-            "post"  => "POST",
-            "get"   => "GET",
-            default => "GET"
-        };
+
+        switch ($type):
+            case "get":
+                $newType = "GET";
+                break;
+            default:
+                $newType = "POST";
+                break;
+        endswitch;
+
+        $this->requestType = $newType;
         return $this;
     }
 
@@ -97,7 +102,7 @@ class Curl
         return $this->requestType;
     }
 
-    public function setData($data): static
+    public function setData($data)
     {
         $this->data = $data;
         return $this;
