@@ -115,7 +115,12 @@ class Smart
 
     public function getEntityId(): string
     {
-        return \CCrmOwnerType::DynamicTypePrefixName . $this->id;
+        return \CCrmOwnerType::DynamicTypePrefixName . $this->getEntityTypeId();
+    }
+
+    public function getEntityTypeId()
+    {
+        return $this->container->getType($this->id)->getEntityTypeId();
     }
 
     public function getFieldsInfo(): array
