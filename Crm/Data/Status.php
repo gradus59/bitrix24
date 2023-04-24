@@ -45,6 +45,25 @@ class Status
         return $stages->fetch()['NAME'];
     }
 
+    public static function getDealSource($id)
+    {
+        $stages = \Bitrix\Crm\StatusTable::getList([
+            'filter' => [
+                'ENTITY_ID' => ['SOURCE'],
+                'STATUS_ID' => $id,
+            ],
+            'order'  => [
+                'SORT' => 'ASC',
+            ],
+            'cache' => array(
+                'ttl' => self::TTL_DAY,
+                'cache_joins' => true,
+            )
+        ]);
+
+        return $stages->fetch()['NAME'];
+    }
+
     public static function getLeadStatus(){}
 
     private static function dealCategories(): array
