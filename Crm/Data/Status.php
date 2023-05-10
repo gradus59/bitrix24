@@ -93,12 +93,12 @@ class Status
             "filter" => []
         ])->fetchAll();
 
+        $catTmp[0] = DealCategory::getDefaultCategoryName();
+
         foreach ($cats as $cat):
             $catTmp[$cat["ID"]] = $cat['NAME'];
         endforeach;
 
-        return array_merge([
-            0 => DealCategory::getDefaultCategoryName()
-        ],$catTmp);
+        return $catTmp;
     }
 }
